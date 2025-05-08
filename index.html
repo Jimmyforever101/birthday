@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 22nd Birthday! 🎉</title>
+    <style>
+        :root {
+            --primary: #e813af;
+            --secondary: #f10784;
+            --background: #fcfbfc;
+            --text: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem;
+            background: var(--primary);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        #countdown {
+            font-size: 1.8rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            margin: 1.5rem auto;
+            max-width:100%;
+            display:flex;
+            justify-content: center;
+            flex-template-columns: repeat(4, 1fr);
+            animation: bounce 1s infinite;
+            gap: 2rem;
+            color: papayawhip;
+            text-align: center;
+        }
+        .time-unit {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.time-unit span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fefe05;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            height: 200px;
+            background-size: cover;
+            background-position:unset;
+            border-radius: 10px;
+            transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.03);
+        }
+        #musicPlayer {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        #wishForm {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+        }
+
+        button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #wishesContainer {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .wish {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--secondary);
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Happy Birthday! Julie 🦄</h1>
+            <div id="countdown" class="countdown"></div>
+        </header>
+        <h2 class="section-title">Precious Memories ✨</h2>
+        <section class="gallery">
+            <div class="gallery-item" style="background-image: url('Assets/5.jpg')"></div>
+            <div class="gallery-item" style="background-image: url('Assets/8.png')"></div>
+            <div class="gallery-item" style="background-position:center; background-image: url('Assets/7.jpg')"></div>
+            <div class="gallery-item" style="background-image: url('Assets/3.jpg')"></div>
+        </section>
+
+        <section id="musicPlayer">
+            <button id="playButton">▶ Play Birthday Music</button>
+            <div id="player"></div>
+        </section>
+
+        <form id="wishForm">
+            <h2>Send Your Wish 💌</h2>
+            <input type="text" placeholder="Your Name" required>
+            <textarea placeholder="Your Message..." rows="4" required></textarea>
+            <button type="submit">Send Wish ✨</button>
+        </form>
+
+        <section id="wishesContainer">
+            <h2>Recent Wishes 💐</h2>
+        </section>
+
+        <footer>
+            <p>Made with ❤ By jimmy! | © 2025 Birthday Celebration</p>
+        </footer>
+    </div>
+
+    <script>
+        // Updated script.js
+document.addEventListener('DOMContentLoaded', () => {
+    // Countdown Timer
+    const birthday = new Date('May21, 2025 00:00:00').getTime(); // Updated year to 2025
+    const countdown = document.getElementById('countdown');
+
+    function updateTimer() {
+        try {
+            const now = new Date().getTime();
+            const diff = birthday - now;
+
+            if (diff < 0) {
+            // Horizontal celebration layout
+            countdown.innerHTML = `
+                <div class="celebration-message">
+                    
+        <p>CONGRATULATIONS ON UR BIRTHDAY!🎂</p>
+                
+                </div>
+            `;
+            return;
+        }
+
+
+            
+
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            countdown.innerHTML = `
+                <div class="time-unit">
+                    <span>${days}d</span>
+                </div>
+                <div class="time-unit">
+                    <span>${hours}h</span>
+                </div>
+                <div class="time-unit">
+                    <span>${minutes}m</span>
+                </div>
+                <div class="time-unit">
+                    <span>${seconds}s</span>
+                </div>
+            `;
+        } catch (error) {
+            console.error('Timer error:', error);
+            countdown.innerHTML = "Birthday countdown loading...";
+        }
+    }
+
+    // Initialize timer
+    if (countdown) {
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+    } else {
+        console.error('Countdown element not found!');
+    }
+
+    // Rest of your other JS code...
+});
+
+        // MUSIC PLAYER
+        const playButton = document.getElementById('playButton');
+        let playerVisible = false;
+
+        playButton.addEventListener('click', () => {
+            playerVisible = !playerVisible;
+            document.getElementById('player').innerHTML = playerVisible ? 
+                `<iframe width="100%" height="200" src="Assets/dir.mp4" 
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>` : 
+                '';
+            playButton.textContent = playerVisible ? '⏹ Stop Music' : '▶ Play Music';
+        });
+
+        // WISH FORM
+        document.getElementById('wishForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = e.target.elements[0].value;
+            const message = e.target.elements[1].value;
+
+            const wish = document.createElement('div');
+            wish.className = 'wish';
+            wish.innerHTML = `
+                <h3>${name}</h3>
+                <p>${message}</p>
+                <small>${new Date().toLocaleDateString()}</small>
+            `;
+
+            document.getElementById('wishesContainer').appendChild(wish);
+            e.target.reset();
+        });
+    </script>
+</body>
+<!-- created by JIMMY FOREVER-->
+</html>
+
